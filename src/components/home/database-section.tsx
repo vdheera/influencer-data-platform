@@ -4,11 +4,14 @@ import React, { useState, ChangeEvent } from 'react'
 import Divider from '@/components/ui/divider'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { Search, Filter, ArrowUpDown } from 'lucide-react'
+import { Search, Filter, ArrowUpDown, ChevronDown } from 'lucide-react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 
 const DatabaseSection = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
+  const [showEmailDialog, setShowEmailDialog] = useState(false)
+  const [email, setEmail] = useState('')
 
   // Sample data structure (in real app, this would come from an API)
   const sampleData = Array.from({ length: 10 }, (_, i) => ({
@@ -26,6 +29,22 @@ const DatabaseSection = () => {
 
   const handleCategoryChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value)
+  }
+
+  const handleNextClick = () => {
+    setShowEmailDialog(true)
+  }
+
+  const handleMoreFiltersClick = () => {
+    setShowEmailDialog(true)
+  }
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle email submission here
+    console.log('Email submitted:', email)
+    setShowEmailDialog(false)
+    setEmail('')
   }
 
   return (
@@ -61,18 +80,25 @@ const DatabaseSection = () => {
                 />
               </div>
               <div className="flex gap-3">
-                <select
-                  className="px-4 py-2 rounded-lg border border-purple-300 bg-white text-purple-950 focus:outline-none focus:ring-2 focus:ring-purple-500"
-                  value={selectedCategory}
-                  onChange={handleCategoryChange}
+                <div className="relative">
+                  <select
+                    className="h-10 pl-4 pr-10 rounded-lg border border-purple-300 bg-white text-purple-950 focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none"
+                    value={selectedCategory}
+                    onChange={handleCategoryChange}
+                  >
+                    <option>All Categories</option>
+                    <option>Fashion</option>
+                    <option>Tech</option>
+                    <option>Lifestyle</option>
+                    <option>Gaming</option>
+                  </select>
+                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-600 pointer-events-none" />
+                </div>
+                <Button 
+                  variant="outline" 
+                  onClick={handleMoreFiltersClick}
+                  className="h-10 flex items-center gap-2 border-purple-300 text-purple-950 hover:bg-purple-50"
                 >
-                  <option>All Categories</option>
-                  <option>Fashion</option>
-                  <option>Tech</option>
-                  <option>Lifestyle</option>
-                  <option>Gaming</option>
-                </select>
-                <Button variant="outline" className="flex items-center gap-2 border-purple-300 text-purple-950 hover:bg-purple-50">
                   <Filter className="h-4 w-4" />
                   More Filters
                 </Button>
@@ -142,12 +168,41 @@ const DatabaseSection = () => {
               </p>
               <div className="flex gap-2">
                 <Button variant="outline" disabled className="border-purple-300 text-purple-950 hover:bg-purple-50">Previous</Button>
-                <Button variant="outline" className="border-purple-300 text-purple-950 hover:bg-purple-50">Next</Button>
+                <Button variant="outline" onClick={handleNextClick} className="border-purple-300 text-purple-950 hover:bg-purple-50">Next</Button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Email Collection Dialog */}
+      <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-purple-950">Get Access to More Data</DialogTitle>
+            <DialogDescription className="text-purple-900">
+              Sign up to access our full database of verified influencers and advanced analytics.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleEmailSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="email"
+                placeholder="Enter your work email"
+                className="w-full"
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <DialogFooter>
+              <Button type="submit" className="w-full bg-purple-900 hover:bg-purple-800 text-white">
+                Get Access
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </section>
   )
 }

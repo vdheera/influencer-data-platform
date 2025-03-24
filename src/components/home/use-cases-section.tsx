@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import Divider from '@/components/ui/divider'
-import { Building2, Users, LineChart, Sparkles } from 'lucide-react'
+import { Building2, Users, LineChart, Sparkles, LucideIcon } from 'lucide-react'
 
-const UseCaseCard = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
+const UseCaseCard = ({ icon: Icon, title, description }: { icon: LucideIcon, title: string, description: string }) => (
   <div className="group relative overflow-hidden rounded-2xl border border-purple-200 bg-white p-8 hover:border-purple-300 transition-all duration-300">
     <div className="absolute inset-0 bg-gradient-to-r from-purple-50 to-pink-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
     <div className="relative z-10">
