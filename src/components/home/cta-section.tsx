@@ -23,8 +23,11 @@ const CtaSection = () => {
         <div className="relative rounded-3xl bg-purple-900 p-8 md:p-12 overflow-hidden">
           <div className="relative max-w-3xl mx-auto text-center">
             <h2 className="heading-lg mb-6 text-white">
-              Get Early Access Today
+              Get Access
             </h2>
+            <p className="text-white/80 mb-8">
+              Start exploring our comprehensive influencer dataset covering millions of creators across major platforms.
+            </p>
             
             <form onSubmit={handleSubmit} className="mb-12">
               <div className="flex flex-col md:flex-row gap-3 max-w-xl mx-auto">

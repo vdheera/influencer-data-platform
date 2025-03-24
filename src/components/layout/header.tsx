@@ -6,9 +6,13 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 
 const Header = () => {
   const [open, setOpen] = useState(false)
+  const [showEmailDialog, setShowEmailDialog] = useState(false)
+  const [email, setEmail] = useState('')
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -18,11 +22,21 @@ const Header = () => {
     setOpen(false) // Close mobile menu after clicking
   }
 
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle email submission here
+    console.log('Email submitted:', email)
+    setShowEmailDialog(false)
+    setEmail('')
+  }
+
   return (
     <header className="absolute top-0 left-0 right-0 z-50 py-4">
       <div className="container-custom flex items-center justify-between">
         <Link href="/" className="flex-shrink-0">
-          <Image src="/images/logo.svg" alt="Equals" width={120} height={28} className="h-7 w-auto" />
+          <span className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-600">
+            zeen
+          </span>
         </Link>
 
         <div className="hidden lg:flex items-center space-x-8">
@@ -44,7 +58,12 @@ const Header = () => {
           >
             Contact
           </button>
-          <Button className="bg-purple-900 hover:bg-purple-800 text-white rounded-full px-6">Start Free Trial</Button>
+          <Button 
+            onClick={() => setShowEmailDialog(true)}
+            className="bg-purple-900 hover:bg-purple-800 text-white rounded-full px-6"
+          >
+            Get Access Now
+          </Button>
         </div>
 
         {/* Mobile Menu */}
@@ -77,8 +96,14 @@ const Header = () => {
                   >
                     Contact
                   </button>
-                  <Button onClick={() => setOpen(false)} className="bg-purple-900 hover:bg-purple-800 text-white rounded-full w-full">
-                    Start Free Trial
+                  <Button 
+                    onClick={() => {
+                      setOpen(false)
+                      setShowEmailDialog(true)
+                    }} 
+                    className="bg-purple-900 hover:bg-purple-800 text-white rounded-full w-full"
+                  >
+                    Get Access Now
                   </Button>
                 </div>
               </div>
@@ -86,6 +111,35 @@ const Header = () => {
           </Sheet>
         </div>
       </div>
+
+      {/* Email Collection Dialog */}
+      <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-xl font-semibold text-purple-950">Get Access</DialogTitle>
+            <DialogDescription className="text-purple-900">
+              Sign up to access our full database of verified influencers and advanced analytics.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handleEmailSubmit} className="space-y-4">
+            <div className="space-y-2">
+              <Input
+                type="email"
+                placeholder="Enter your work email"
+                className="w-full"
+                value={email}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <DialogFooter>
+              <Button type="submit" className="w-full bg-purple-900 hover:bg-purple-800 text-white">
+                Get Access
+              </Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </header>
   )
 }

@@ -58,10 +58,10 @@ const DatabaseSection = () => {
       <div className="container-custom relative z-10">
         <div className="text-center mb-16">
           <h1 className="heading-xl mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-pink-600 to-purple-900">
-            Explore Our Database
+            Influencer Intelligence Database
           </h1>
           <p className="text-lg text-purple-950">
-            Search through thousands of verified influencers across all major platforms
+            Browse through millions of verified influencers with detailed metrics and insights
           </p>
         </div>
 
@@ -73,27 +73,25 @@ const DatabaseSection = () => {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-purple-600 h-4 w-4" />
                 <Input
                   type="text"
-                  placeholder="Search influencers..."
+                  placeholder="Search by name, category, or location..."
                   className="pl-10 bg-white w-full"
                   value={searchTerm}
                   onChange={handleSearchChange}
                 />
               </div>
               <div className="flex gap-3">
-                <div className="relative">
-                  <select
-                    className="h-10 pl-4 pr-10 rounded-lg border border-purple-300 bg-white text-purple-950 focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none"
-                    value={selectedCategory}
-                    onChange={handleCategoryChange}
-                  >
-                    <option>All Categories</option>
-                    <option>Fashion</option>
-                    <option>Tech</option>
-                    <option>Lifestyle</option>
-                    <option>Gaming</option>
-                  </select>
-                  <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-purple-600 pointer-events-none" />
-                </div>
+                <select
+                  className="h-10 pl-4 pr-10 rounded-lg border border-purple-300 bg-white text-purple-950 focus:outline-none focus:ring-2 focus:ring-purple-500 appearance-none"
+                  value={selectedCategory}
+                  onChange={handleCategoryChange}
+                >
+                  <option>All Categories</option>
+                  <option>Lifestyle</option>
+                  <option>Fashion</option>
+                  <option>Tech</option>
+                  <option>Beauty</option>
+                  <option>Gaming</option>
+                </select>
                 <Button 
                   variant="outline" 
                   onClick={handleMoreFiltersClick}
@@ -113,19 +111,19 @@ const DatabaseSection = () => {
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Name
+                      Creator
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Platform
+                      Location
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Followers
+                      Audience
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
@@ -137,7 +135,7 @@ const DatabaseSection = () => {
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Category
+                      Topics
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>

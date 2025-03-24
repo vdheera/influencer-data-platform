@@ -24,10 +24,10 @@ const UseCasesSection = () => {
         
         <div className="text-center mb-16">
           <h2 className="heading-lg mb-4 bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-600">
-            Unlock the Power of Influencer Data
+            Power Your Business with Influencer Data
           </h2>
           <p className="text-lg text-purple-900">
-            Comprehensive datasets powering the future of creator marketing
+            Comprehensive datasets enabling data-driven decisions across industries
           </p>
         </div>
 
@@ -35,25 +35,25 @@ const UseCasesSection = () => {
           <UseCaseCard
             icon={Building2}
             title="Brand Marketing"
-            description="Find the perfect creators to promote your products and run ad campaigns. Make data-driven decisions with comprehensive creator insights and audience analytics."
+            description="Access detailed creator profiles to identify perfect brand ambassadors. Analyze engagement rates, audience demographics, and content performance to optimize campaigns."
           />
 
           <UseCaseCard
             icon={Users}
             title="Talent Agencies"
-            description="Discover up-and-coming creators before they go viral. Identify emerging talent across platforms and categories to build your roster of influencers."
+            description="Track emerging creators with our comprehensive growth metrics. Get insights into audience engagement, content performance, and demographic reach across platforms."
           />
 
           <UseCaseCard
             icon={LineChart}
             title="Consumer Research"
-            description="Power your behavioral analytics with rich creator and audience data. Understand trends, preferences, and engagement patterns across demographics."
+            description="Analyze creator content and audience data to understand market trends. Get insights into consumer preferences, engagement patterns, and demographic distributions."
           />
 
           <UseCaseCard
             icon={Sparkles}
             title="AI/ML Applications"
-            description="Build the next generation of consumer search engines and recommendation systems using our comprehensive creator and engagement datasets."
+            description="Train recommendation systems and analysis tools with our structured creator data. Access clean, formatted datasets covering millions of creators and their metrics."
           />
         </div>
       </div>

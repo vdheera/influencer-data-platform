@@ -12,8 +12,11 @@ const HeroSection = () => {
         
         <div className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="heading-lg mb-8 bg-clip-text text-transparent bg-gradient-to-r from-purple-900 to-pink-600">
-            Find the perfect influencers for your brand&mdash;with comprehensive data and real-time insights.
+            Access comprehensive influencer data—demographics, engagement, content analysis, and more.
           </h2>
+          <p className="text-lg text-purple-900">
+            Get detailed insights on creators worldwide: their location, audience demographics, engagement metrics, and content patterns.
+          </p>
         </div>
         
         {/* Integrate chat demo directly in hero */}
