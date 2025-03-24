@@ -1,9 +1,9 @@
 import React from 'react'
 import Image from 'next/image'
 import Divider from '@/components/ui/divider'
-import { FileDown, MessageSquare, SlidersHorizontal, HeartHandshake } from 'lucide-react'
+import { FileDown, MessageSquare, SlidersHorizontal, HeartHandshake, LucideIcon } from 'lucide-react'
 
-const FeatureItem = ({ icon: Icon, title, description }: { icon: any, title: string, description: string }) => (
+const FeatureItem = ({ icon: Icon, title, description }: { icon: LucideIcon, title: string, description: string }) => (
   <div className="flex items-start space-x-4 group">
     <div className="shrink-0">
       <div className="rounded-xl bg-gradient-to-r from-purple-100 to-pink-100 p-2.5 group-hover:from-purple-200 group-hover:to-pink-200 transition-colors duration-300">
