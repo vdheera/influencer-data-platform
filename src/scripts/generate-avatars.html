@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate Avatars</title>
+    <style>
+        .avatar {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 160px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        #avatar2 {
+            background: linear-gradient(45deg, #A8E6CF, #3B82F6);
+        }
+        #avatar3 {
+            background: linear-gradient(45deg, #FFD93D, #FF6B6B);
+        }
+    </style>
+</head>
+<body>
+    <div id="avatar1" class="avatar">SJ</div>
+    <div id="avatar2" class="avatar">EC</div>
+    <div id="avatar3" class="avatar">MR</div>
+    <script>
+        // Function to convert div to image and download
+        function downloadAvatar(id, filename) {
+            const div = document.getElementById(id);
+            const canvas = document.createElement('canvas');
+            canvas.width = 400;
+            canvas.height = 400;
+            
+            const ctx = canvas.getContext('2d');
+            const data = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400">
+                <foreignObject width="400" height="400">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="${div.style.cssText}">
+                        <div style="width: 400px; height: 400px; display: flex; align-items: center; justify-content: center; font-family: system-ui; font-size: 160px; color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.2);">
+                            ${div.textContent}
+                        </div>
+                    </div>
+                </foreignObject>
+            </svg>`;
+            
+            const img = new Image();
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0);
+                const link = document.createElement('a');
+                link.download = filename;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            };
+            img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(data);
+        }
+
+        // Download all avatars
+        window.onload = function() {
+            downloadAvatar('avatar1', 'avatar-1.png');
+            setTimeout(() => downloadAvatar('avatar2', 'avatar-2.png'), 500);
+            setTimeout(() => downloadAvatar('avatar3', 'avatar-3.png'), 1000);
+        };
+    </script>
+</body>
+</html> 

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Equals - The Connected Spreadsheet",
-  description: "Track ARR, SaaS metrics, and more with live data from Stripe, Salesforce, Hubspot, and SQL—no CSVs required. Build live dashboards and pivot tables in seconds.",
+  title: "InfluencerIQ - The Ultimate Influencer Data Platform",
+  description: "Access comprehensive influencer analytics and insights across social media platforms. Find the perfect influencers for your marketing campaigns with detailed engagement metrics, audience demographics, and performance data.",
 };
 
 export default function RootLayout({

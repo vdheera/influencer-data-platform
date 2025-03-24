@@ -1,28 +1,58 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import Divider from '@/components/ui/divider'
+import { ArrowRight, Mail } from 'lucide-react'
 
 const CtaSection = () => {
-  return (
-    <section className="py-20 relative overflow-hidden">
-      {/* Background gradient blocks */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute right-0 top-0 w-64 h-64 bg-primary opacity-30 blur-lg" />
-        <div className="absolute right-1/4 top-1/4 w-48 h-48 bg-accent opacity-40 blur-lg rounded-full" />
-        <div className="absolute left-1/3 bottom-0 w-72 h-32 bg-destructive opacity-20 blur-lg" />
-        <div className="absolute left-0 top-1/3 w-40 h-40 bg-primary opacity-30 blur-lg rounded-full" />
-      </div>
+  const [email, setEmail] = useState('')
 
-      <div className="container-custom relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="heading-lg mb-6">
-            Upgrade your spreadsheet to real-time
-          </h2>
-          <p className="text-lg text-gray-600 mb-8">
-            Gain instant clarity on ARR, SaaS metrics, sales performance, and product engagement—no CSVs required.
-          </p>
-          <Button className="btn-primary px-8 py-6 text-base">
-            Get Started
-          </Button>
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle email submission here
+    console.log('Email submitted:', email)
+  }
+
+  return (
+    <section className="relative py-24 bg-white">
+      <div className="container-custom relative">
+        <Divider />
+        
+        <div className="relative rounded-3xl bg-purple-900 p-8 md:p-12 overflow-hidden">
+          <div className="relative max-w-3xl mx-auto text-center">
+            <h2 className="heading-lg mb-6 text-white">
+              Get Early Access Today
+            </h2>
+            
+            <form onSubmit={handleSubmit} className="mb-12">
+              <div className="flex flex-col md:flex-row gap-3 max-w-xl mx-auto">
+                <Input
+                  type="email"
+                  placeholder="Enter your work email"
+                  className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/20 h-12"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Button 
+                  type="submit" 
+                  className="bg-white text-purple-900 hover:bg-white/90 transition-colors group h-12 px-8"
+                >
+                  Get Access
+                  <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-0.5 transition-transform" />
+                </Button>
+              </div>
+            </form>
+
+            <div className="flex items-center justify-center space-x-2 text-white/80">
+              <Mail className="h-5 w-5" />
+              <p>
+                Email <a href="mailto:team@tryzeen.co" className="text-white hover:underline">team@tryzeen.co</a> with any questions or requests
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

@@ -9,33 +9,33 @@ const TestimonialsSection = () => {
       <div className="container-custom">
         <div className="mb-16">
           <h2 className="heading-lg text-center mb-6">
-            We built Equals for ourselves. Turns out we weren't the only ones who needed it.
+            Leading brands trust InfluencerIQ to power their influencer marketing strategies.
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <TestimonialCard
-            quote="Equals is where I do all of my analysis. It gives me back at least an hour or two every week. You'll never get my hands off of this product."
-            name="Nicolas Malianni"
-            title="Head of Accounting, Notion"
-            category="Business Intelligence"
-            link="/business-intelligence/"
+            quote="InfluencerIQ has transformed how we find and work with influencers. The data insights have helped us increase our campaign ROI by 300% in just six months."
+            name="Sarah Chen"
+            title="Head of Digital Marketing, Nike"
+            category="Brand Partnerships"
+            link="/brand-partnerships/"
           />
 
           <TestimonialCard
-            quote="We evaluated Equals against a bunch of vendors but nobody was as accurate in ARR reporting. That and the ease of dashboards made it a no-brainer."
-            name="Rohit Divate"
-            title="Head of Finance & Ops, Sprig"
-            category="Subscription Analytics"
-            link="/subscription-analytics/"
+            quote="The platform's analytics are incredible. We can now make data-driven decisions about which influencers to work with and track real impact on our bottom line."
+            name="Michael Rodriguez"
+            title="Marketing Director, Sephora"
+            category="Campaign Analytics"
+            link="/campaign-analytics/"
           />
 
           <TestimonialCard
-            quote="Within a week, we had a pipeline performance dashboard up and running. Building something similar ourselves would have taken 3+ months."
-            name="Joe Ryan"
-            title="VP of Revenue Strategy, LaunchDarkly"
-            category="CRM Analytics"
-            link="/crm-analytics/"
+            quote="Finding the right influencers used to take weeks. With InfluencerIQ, we can identify perfect matches for our brand in minutes, with detailed audience alignment data."
+            name="Emily Watson"
+            title="Influencer Marketing Lead, H&M"
+            category="Influencer Discovery"
+            link="/influencer-discovery/"
           />
         </div>
 
@@ -48,7 +48,7 @@ const TestimonialsSection = () => {
             <StarIcon className="w-5 h-5 text-yellow-400 fill-yellow-400" />
           </div>
           <h3 className="text-xl font-bold mb-2">4.9 out of 5</h3>
-          <Link href="https://www.g2.com/products/equals/reviews" className="text-primary font-medium hover:underline" target="_blank" rel="noopener noreferrer">
+          <Link href="https://www.g2.com/products/influenceriq/reviews" className="text-primary font-medium hover:underline" target="_blank" rel="noopener noreferrer">
             Read G2 reviews
           </Link>
         </div>

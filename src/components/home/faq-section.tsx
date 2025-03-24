@@ -10,32 +10,32 @@ const FaqSection = () => {
         <div className="max-w-3xl mx-auto">
           <Accordion type="single" collapsible className="space-y-4">
             <FaqItem
-              question="How is Equals different from Excel or Google Sheets?"
-              answer="Equals is a connected spreadsheet—it links directly to Stripe, Salesforce, SQL databases, and more. Your data and formulas update automatically in real time, eliminating CSV exports and copy-paste headaches. You get the simplicity of a spreadsheet with the power of live data at your fingertips."
+              question="How is InfluencerIQ different from other influencer marketing platforms?"
+              answer="InfluencerIQ provides the most comprehensive data analytics across all major social media platforms. We offer real-time performance tracking, detailed audience demographics, and AI-powered matching that helps you find the perfect influencers for your brand. Our platform also includes advanced ROI tracking and campaign performance analytics that other platforms don't offer."
               value="item-1"
             />
 
             <FaqItem
-              question="Does Equals have all the spreadsheet features I expect? How is performance?"
-              answer="Yes. Equals is a full-featured, connected spreadsheet with pivot tables, charts, over 100 formulas, real-time collaboration, AI assist for SQL and formulas, and much more. We've built a fast engine under the hood, so you'll find Equals performs as well—or better—than Google Sheets, even with large data sets."
+              question="What social media platforms do you cover?"
+              answer="We cover all major social media platforms including Instagram, TikTok, YouTube, Twitter, and LinkedIn. Our platform provides detailed analytics and insights for each platform, with real-time data updates and cross-platform performance comparisons."
               value="item-2"
             />
 
             <FaqItem
-              question="What data sources can Equals connect to?"
-              answer="Equals connects directly to Stripe, Salesforce, HubSpot, SQL databases (including Snowflake, BigQuery, Redshift, Postgres, and MySQL), and more. You can also use our Import Scripts feature to connect to any API with a few lines of JavaScript or Python."
+              question="What kind of data and metrics do you provide?"
+              answer="Our platform provides comprehensive metrics including engagement rates, audience demographics, content performance, reach, impressions, and ROI tracking. We also offer unique insights like audience sentiment analysis, brand alignment scores, and predictive performance metrics."
               value="item-3"
             />
 
             <FaqItem
-              question="Can I use Equals for subscription analytics, like tracking ARR or MRR?"
-              answer="Absolutely! Equals excels at subscription analytics. We have pre-built templates for tracking ARR, MRR, churn, cohorts, and all your key SaaS metrics. Our Stripe integration makes it especially easy to get started quickly."
+              question="Can I use InfluencerIQ to manage my influencer relationships and campaigns?"
+              answer="Absolutely! Beyond data and analytics, InfluencerIQ includes tools for influencer outreach, campaign management, contract handling, and performance tracking. You can manage your entire influencer marketing workflow within our platform."
               value="item-4"
             />
 
             <FaqItem
               question="How does pricing work?"
-              answer="Equals offers flexible pricing based on your team size and needs. We have plans for startups, growth-stage companies, and enterprises. Visit our pricing page for details or contact us for a custom quote."
+              answer="InfluencerIQ offers flexible pricing based on your needs and campaign scale. We have plans for businesses of all sizes, from startups to enterprise brands. Visit our pricing page for details or contact us for a custom quote tailored to your specific requirements."
               value="item-5"
             />
           </Accordion>
