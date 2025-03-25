@@ -8,11 +8,14 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { supabase } from '@/lib/supabase'
+import { useToast } from "@/hooks/use-toast"
 
 const Header = () => {
   const [open, setOpen] = useState(false)
   const [showEmailDialog, setShowEmailDialog] = useState(false)
   const [email, setEmail] = useState('')
+  const { toast } = useToast()
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -22,12 +25,43 @@ const Header = () => {
     setOpen(false) // Close mobile menu after clicking
   }
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle email submission here
-    console.log('Email submitted:', email)
-    setShowEmailDialog(false)
-    setEmail('')
+    
+    try {
+      const { error } = await supabase
+        .from('emails')
+        .insert([
+          { email: email }
+        ])
+
+      if (error) {
+        console.error('Supabase error details:', error)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.message,
+        })
+        return
+      }
+
+      // Clear form and close dialog on success
+      setEmail('')
+      setShowEmailDialog(false)
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "Thanks for subscribing! We'll be in touch soon.",
+      })
+      
+    } catch (error: any) {
+      console.error('Detailed error:', error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error?.message || "An unknown error occurred",
+      })
+    }
   }
 
   return (
@@ -125,7 +159,7 @@ const Header = () => {
             <div className="space-y-2">
               <Input
                 type="email"
-                placeholder="Enter your work email"
+                placeholder="Enter your email"
                 className="w-full"
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}

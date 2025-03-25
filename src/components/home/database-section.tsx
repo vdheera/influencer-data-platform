@@ -6,22 +6,129 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { Search, Filter, ArrowUpDown, ChevronDown } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog'
+import { supabase } from '@/lib/supabase'
+import { useToast } from "@/hooks/use-toast"
+
+const TopicPill = ({ topic }: { topic: string }) => {
+  const colors = {
+    Fashion: 'bg-pink-100 text-pink-700 border-pink-200',
+    Tech: 'bg-blue-100 text-blue-700 border-blue-200',
+    Lifestyle: 'bg-purple-100 text-purple-700 border-purple-200',
+    Gaming: 'bg-green-100 text-green-700 border-green-200',
+    Beauty: 'bg-orange-100 text-orange-700 border-orange-200',
+    Travel: 'bg-sky-100 text-sky-700 border-sky-200',
+    Food: 'bg-yellow-100 text-yellow-700 border-yellow-200',
+    Fitness: 'bg-emerald-100 text-emerald-700 border-emerald-200'
+  } as const
+
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium border ${colors[topic as keyof typeof colors] || 'bg-gray-100 text-gray-700 border-gray-200'}`}>
+      {topic}
+    </span>
+  )
+}
 
 const DatabaseSection = () => {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [showEmailDialog, setShowEmailDialog] = useState(false)
   const [email, setEmail] = useState('')
+  const [dialogType, setDialogType] = useState<'next' | 'filters'>('next')
+  const { toast } = useToast()
 
   // Sample data structure (in real app, this would come from an API)
-  const sampleData = Array.from({ length: 10 }, (_, i) => ({
-    id: i + 1,
-    name: `Influencer ${i + 1}`,
-    platform: ['Instagram', 'TikTok', 'YouTube'][Math.floor(Math.random() * 3)],
-    followers: Math.floor(Math.random() * 1000000) + 10000,
-    engagement: (Math.random() * 10).toFixed(2) + '%',
-    category: ['Fashion', 'Tech', 'Lifestyle', 'Gaming'][Math.floor(Math.random() * 4)]
-  }))
+  const sampleData = [
+    {
+      id: 1,
+      name: '@corporatenatalie',
+      platform: 'Instagram',
+      followers: 1000000,
+      avgLikes: 13400,
+      category: 'Lifestyle',
+      demographics: '25-34 US'
+    },
+    {
+      id: 2,
+      name: '@thepassportabuser',
+      platform: 'Instagram',
+      followers: 179000,
+      avgLikes: 3000,
+      category: 'Travel',
+      demographics: '25-34 US'
+    },
+    {
+      id: 3,
+      name: '@salunchador',
+      platform: 'Instagram',
+      followers: 65000,
+      avgLikes: 8900,
+      category: 'Food',
+      demographics: '18-34 US'
+    },
+    {
+      id: 4,
+      name: '@alexgiardina15',
+      platform: 'Instagram',
+      followers: 152000,
+      avgLikes: 15000,
+      category: 'Fitness',
+      demographics: '18-34 US'
+    },
+    {
+      id: 5,
+      name: '@adrianamejiamakeup',
+      platform: 'Instagram',
+      followers: 137000,
+      avgLikes: 4800,
+      category: 'Beauty',
+      demographics: '18-34 US'
+    },
+    {
+      id: 6,
+      name: '@asalamalika',
+      platform: 'Instagram',
+      followers: 63000,
+      avgLikes: 5500,
+      category: 'Fashion',
+      demographics: '18-34 US'
+    },
+    {
+      id: 7,
+      name: '@subrozayt',
+      platform: 'Instagram',
+      followers: 66000,
+      avgLikes: 18600,
+      category: 'Gaming',
+      demographics: '18-24 NA'
+    },
+    {
+      id: 8,
+      name: '@annajenea',
+      platform: 'TikTok',
+      followers: 50000,
+      avgLikes: 100000,
+      category: 'Fashion',
+      demographics: '13-24 US'
+    },
+    {
+      id: 9,
+      name: '@craftylumberjacks',
+      platform: 'Instagram',
+      followers: 74000,
+      avgLikes: 1000,
+      category: 'Lifestyle',
+      demographics: '25-44 US'
+    },
+    {
+      id: 10,
+      name: '@localpassportfamily',
+      platform: 'Instagram',
+      followers: 75000,
+      avgLikes: 750,
+      category: 'Travel',
+      demographics: '25-44 US'
+    }
+  ]
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value)
@@ -32,19 +139,52 @@ const DatabaseSection = () => {
   }
 
   const handleNextClick = () => {
+    setDialogType('next')
     setShowEmailDialog(true)
   }
 
   const handleMoreFiltersClick = () => {
+    setDialogType('filters')
     setShowEmailDialog(true)
   }
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
+  const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle email submission here
-    console.log('Email submitted:', email)
-    setShowEmailDialog(false)
-    setEmail('')
+    
+    try {
+      const { error } = await supabase
+        .from('emails')
+        .insert([
+          { email: email }
+        ])
+
+      if (error) {
+        console.error('Supabase error details:', error)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.message,
+        })
+        return
+      }
+
+      // Clear form and close dialog on success
+      setEmail('')
+      setShowEmailDialog(false)
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "Thanks for subscribing! We'll be in touch soon.",
+      })
+      
+    } catch (error: any) {
+      console.error('Detailed error:', error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error?.message || "An unknown error occurred",
+      })
+    }
   }
 
   return (
@@ -111,13 +251,13 @@ const DatabaseSection = () => {
                 <tr>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Creator
+                      Creator Handle
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Location
+                      Platform
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
@@ -129,7 +269,13 @@ const DatabaseSection = () => {
                   </th>
                   <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
                     <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
-                      Engagement
+                      Avg. Likes
+                      <ArrowUpDown className="h-4 w-4" />
+                    </div>
+                  </th>
+                  <th className="px-6 py-4 text-left text-sm font-semibold text-purple-950">
+                    <div className="flex items-center gap-2 cursor-pointer hover:text-pink-700">
+                      Demographics
                       <ArrowUpDown className="h-4 w-4" />
                     </div>
                   </th>
@@ -149,8 +295,11 @@ const DatabaseSection = () => {
                     <td className="px-6 py-4 text-sm text-purple-900">
                       {new Intl.NumberFormat().format(row.followers)}
                     </td>
-                    <td className="px-6 py-4 text-sm text-purple-900">{row.engagement}</td>
-                    <td className="px-6 py-4 text-sm text-purple-900">{row.category}</td>
+                    <td className="px-6 py-4 text-sm text-purple-900">{Math.floor(row.avgLikes / 1000)}K</td>
+                    <td className="px-6 py-4 text-sm text-purple-900">{row.demographics}</td>
+                    <td className="px-6 py-4 text-sm text-purple-900">
+                      <TopicPill topic={row.category} />
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -177,16 +326,22 @@ const DatabaseSection = () => {
       <Dialog open={showEmailDialog} onOpenChange={setShowEmailDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle className="text-xl font-semibold text-purple-950">Get Access to More Data</DialogTitle>
+            <DialogTitle className="text-xl font-semibold text-purple-950">
+              {dialogType === 'next' 
+                ? 'Access More Influencer Data' 
+                : 'Unlock Advanced Filters'}
+            </DialogTitle>
             <DialogDescription className="text-purple-900">
-              Sign up to access our full database of verified influencers and advanced analytics.
+              {dialogType === 'next' 
+                ? 'Sign up to browse our complete database of verified influencers with detailed metrics and insights.'
+                : 'Get access to advanced filtering options including engagement rates, audience demographics, and content performance metrics.'}
             </DialogDescription>
           </DialogHeader>
           <form onSubmit={handleEmailSubmit} className="space-y-4">
             <div className="space-y-2">
               <Input
                 type="email"
-                placeholder="Enter your work email"
+                placeholder="Enter your email"
                 className="w-full"
                 value={email}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
@@ -195,7 +350,7 @@ const DatabaseSection = () => {
             </div>
             <DialogFooter>
               <Button type="submit" className="w-full bg-purple-900 hover:bg-purple-800 text-white">
-                Get Access
+                {dialogType === 'next' ? 'Get Full Access' : 'Unlock Filters'}
               </Button>
             </DialogFooter>
           </form>

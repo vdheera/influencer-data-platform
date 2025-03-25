@@ -5,14 +5,49 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import Divider from '@/components/ui/divider'
 import { ArrowRight, Mail } from 'lucide-react'
+import { supabase } from '@/lib/supabase'
+import { useToast } from "@/hooks/use-toast"
 
 const CtaSection = () => {
   const [email, setEmail] = useState('')
+  const { toast } = useToast()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle email submission here
-    console.log('Email submitted:', email)
+    
+    try {
+      const { error } = await supabase
+        .from('emails')
+        .insert([
+          { email: email }
+        ])
+
+      if (error) {
+        console.error('Supabase error details:', error)
+        toast({
+          variant: "destructive",
+          title: "Error",
+          description: error.message,
+        })
+        return
+      }
+
+      // Clear form on success
+      setEmail('')
+      toast({
+        variant: "success",
+        title: "Success!",
+        description: "Thanks for subscribing! We'll be in touch soon.",
+      })
+      
+    } catch (error: any) {
+      console.error('Detailed error:', error)
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: error?.message || "An unknown error occurred",
+      })
+    }
   }
 
   return (
@@ -33,7 +68,7 @@ const CtaSection = () => {
               <div className="flex flex-col md:flex-row gap-3 max-w-xl mx-auto">
                 <Input
                   type="email"
-                  placeholder="Enter your work email"
+                  placeholder="Enter your email"
                   className="flex-1 bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:bg-white/20 h-12"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}

@@ -37,27 +37,27 @@ const FeaturesSection = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <FeatureItem
-                icon={FileDown}
-                title="Export to CSV"
-                description="Download your data in CSV format for seamless integration with your existing tools and workflows."
+                icon={SlidersHorizontal}
+                title="Unique Datapoints"
+                description="Access brand deals history, content performance trends, audience sentiment analysis, and cross-platform reach metrics."
               />
 
               <FeatureItem
                 icon={MessageSquare}
-                title="Natural Language Queries"
-                description="Ask questions in plain English and get instant answers from our AI-powered search system."
-              />
-
-              <FeatureItem
-                icon={SlidersHorizontal}
-                title="Custom Query Builder"
-                description="Create precise queries using our intuitive filters to find exactly the data you need."
+                title="Natural Language Search"
+                description="Find creators using plain English queries - search by content performance, audience traits, or brand collaborations."
               />
 
               <FeatureItem
                 icon={HeartHandshake}
                 title="Dedicated Support"
                 description="Need specific datapoints? Our team is ready to help source the data you're looking for."
+              />
+
+              <FeatureItem
+                icon={FileDown}
+                title="Export & Integrate"
+                description="Download your data in CSV format for seamless integration with your existing tools and workflows."
               />
             </div>
           </div>
