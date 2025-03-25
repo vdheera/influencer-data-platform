@@ -40,12 +40,12 @@ const CtaSection = () => {
         description: "Thanks for subscribing! We'll be in touch soon.",
       })
       
-    } catch (error: any) {
+    } catch (error) {
       console.error('Detailed error:', error)
       toast({
         variant: "destructive",
         title: "Error",
-        description: error?.message || "An unknown error occurred",
+        description: error instanceof Error ? error.message : "An unknown error occurred",
       })
     }
   }
